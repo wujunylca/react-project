@@ -1,7 +1,7 @@
 import React,{PureComponent} from 'react';
 import {hot} from 'react-hot-loader/root';
-import img1 from '../assert/img.jpg';
-import img2 from '../assert/img2.svg';
+import img1 from '@/assert/img.jpg';
+import img2 from '@/assert/img2.svg';
 import './App.css'
 
 class AppDemo extends PureComponent {
@@ -17,7 +17,7 @@ class AppDemo extends PureComponent {
     render() {
         return (
             <div className='page'>
-                测试demo,cheng
+                测试dxxxemosss,cheng
                 局部更新{this.state.name}
                 <button onClick={this.handleClick.bind(this)}>点击测试局部更新 </button>
                 <img src={img1} />
