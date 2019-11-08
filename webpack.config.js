@@ -19,16 +19,22 @@ module.exports = {
                 use:[
                     {
                         loader:'babel-loader'
-                        // options:{
-                        //     presets:['env']
-                        // }
                     }
                 ]
             },
             {
                 test:/\.css$/,
-                use:['style-loader']
+                use:['style-loader','css-loader']
             },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192
+                    }
+                }]
+            }
         ]
     },
     plugins:[
