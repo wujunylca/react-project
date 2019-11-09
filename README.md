@@ -51,12 +51,14 @@
  
 #步骤5:代码分离 按需加载，只加载对应的文件,
 修改入口
+
     entry: {
         app:[ 'react-hot-loader/patch', './src/index.js'],
         vendor:['react','react-router-dom','react-dom']
     },
 
 添加配置
+
         optimization:{
         splitChunks:{
             cacheGroups:{
