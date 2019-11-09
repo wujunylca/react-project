@@ -1,5 +1,6 @@
 import React,{FC} from 'react';
 
+
 const Page1 = (props) => {
     console.log('测试是否可以通过',props)
     const {history} = props;
