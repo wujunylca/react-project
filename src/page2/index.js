@@ -1,6 +1,6 @@
 import React,{FC} from 'react';
 
-const Page1 = () => {
+const Page2 = () => {
     return (
         <>
             页面22222
@@ -8,4 +8,4 @@ const Page1 = () => {
     )
 }
 
-export default Page1;
+export default Page2;
