@@ -2,9 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import AppDemo from './App';
+import BasicRoute from './Router';
  
 ReactDOM.render(
-    <AppDemo />,
+    <BasicRoute />,
     document.getElementById('root')
   );
 
