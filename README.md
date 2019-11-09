@@ -47,3 +47,63 @@
       document.getElementById('root')
     );
 此时，启动应用，可以切换路由查看效果
+
+#步骤4:
+添加路由，使用函数方式跳转路由
+import {HashRouter,Route,Switch,hashHistory} from 'react-router-dom';
+ <HashRouter history={hashHistory}>
+            <Switch> 
+                <Route exact path='/' component={Home} ></Route>
+                <Route exact path='/page1' component={Home} ></Route>
+                <Route exact path='/page2' component={Page2} ></Route>
+            </Switch>
+        </HashRouter>
+ 
+#步骤5:代码分离 按需加载，只加载对应的文件,
+安装 yarn add @babel/plugin-syntax-dynamic-import  react-loadable --dev
+在 Router.js 中 修改代码
+
+import React from 'react';
+import Loadable from 'react-loadable';
+import {HashRouter,Route,Switch,hashHistory} from 'react-router-dom';
+
+// import {AutoLoader} from '@/components';
+
+const LoadingStatus = ({ pastDelay, timedOut, error }) => {
+    if (pastDelay) {
+    return <div>loading</div>;
+    } 
+     if (timedOut) {
+    return <div>Taking a long time...</div>;
+    } 
+     if (error) {
+    return <div>Error!</div>;
+    }
+    return null;
+   };
+
+const Home = Loadable({
+    loader:() => import('./page1/index'),
+    loading:LoadingStatus
+});
+const Page2 = Loadable({
+    loader:() => import('./page2/index'),
+    loading:LoadingStatus
+});
+
+const BasicRoute =() => {
+    return (
+        <HashRouter history={hashHistory}>
+            <Switch> 
+                <Route exact path='/' component={Home} ></Route>
+                <Route exact path='/page1' component={Home} ></Route>
+                <Route exact path='/page2' component={Page2} ></Route>
+            </Switch>
+        </HashRouter>
+    )
+}
+
+export default BasicRoute;
+
+
+
