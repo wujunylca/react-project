@@ -4,52 +4,41 @@
 
 # 创建react 项目架子
 
-# 添加路由  react-router-dom
+# 网站优化  webapck 配置
 
-+ 使用的话 推荐看文章 https://www.jianshu.com/p/8954e9fb0c7e
++ 使用的话 默认了解过webpack  在webpack.config.js 中修改
 
-#步骤1:
-
-    安装 yarn add react-router-dom --dev
-    
-#步骤2:
-    在src 目录下，新建 Router.js
-
-    import React from 'react';
-    import {HashRouter,Route,Switch} from 'react-router-dom';
-
-    import Home from '@/page1';
-    import Page2 from '@/page2';
-
-    const BasicRoute =() => {
-        return (
-            <HashRouter>
-                <Switch>
-                    <Route exact path='/' component={Home} ></Route>
-                    <Route exact path='/page1' component={Home} ></Route>
-                    <Route exact path='/page2' component={Page2} ></Route>
-                </Switch>
-            </HashRouter>
-        )
-    }
-
-    export default BasicRoute;
-#步骤3:
-  在index.js 文件下引入
+#步骤1:dev-server
+  +参考地址：几个热加载对比  https://www.jianshu.com/p/bcad129a1c69
   
-  import React from 'react';
-  import ReactDOM from 'react-dom'
-  import AppDemo from './App';
-  import BasicRoute from './Router';
+    devServer:{
+        contentBase:path.join(__dirname,'dist'),
+        host:'localhost',
+        port:3000,
+        proxy:{
+            "/api":"http://localhost:3000"
+        }
+    },
 
-  ReactDOM.render(
-      <BasicRoute />,
-      document.getElementById('root')
-    );
-此时，启动应用，可以切换路由查看效果
+    
+#步骤2:devtool 开发环境,定位错误代码 
 
-#步骤4:
-添加路由，使用函数方式跳转路由
+        devtool: 'inline-source-map',
+        
+#步骤3:缓存 output hash 文件
+    假设第一次下载了文件，下一次访问就不下载了。
+  
+            output:{
+            path:path.resolve(__dirname, './dist'),
+            filename:'[name].[hash].js',
+            chunkFilename:'[name].[chunkhash].js'
+        },
+        
+       此时打包，可以看到dist 文件下的文件名已经变成了hash的文件名了
+
+  
+#步骤4:提取公共文件，避免重复打包 entry 
+
 
     import {HashRouter,Route,Switch,hashHistory} from 'react-router-dom';
      <HashRouter history={hashHistory}>
@@ -61,52 +50,24 @@
             </HashRouter>
  
 #步骤5:代码分离 按需加载，只加载对应的文件,
+修改入口
+    entry: {
+        app:[ 'react-hot-loader/patch', './src/index.js'],
+        vendor:['react','react-router-dom','react-dom']
+    },
 
-    安装 yarn add @babel/plugin-syntax-dynamic-import  react-loadable --dev
-
-在 Router.js 中 修改代码
-
-    import React from 'react';
-    import Loadable from 'react-loadable';
-    import {HashRouter,Route,Switch,hashHistory} from 'react-router-dom';
-
-    // import {AutoLoader} from '@/components';
-
-    const LoadingStatus = ({ pastDelay, timedOut, error }) => {
-        if (pastDelay) {
-        return <div>loading</div>;
-        } 
-         if (timedOut) {
-        return <div>Taking a long time...</div>;
-        } 
-         if (error) {
-        return <div>Error!</div>;
+添加配置
+        optimization:{
+        splitChunks:{
+            cacheGroups:{
+                vendor:{
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: 1
+                }
+            }
         }
-        return null;
-       };
-
-    const Home = Loadable({
-        loader:() => import('./page1/index'),
-        loading:LoadingStatus
-    });
-    const Page2 = Loadable({
-        loader:() => import('./page2/index'),
-        loading:LoadingStatus
-    });
-
-    const BasicRoute =() => {
-        return (
-            <HashRouter history={hashHistory}>
-                <Switch> 
-                    <Route exact path='/' component={Home} ></Route>
-                    <Route exact path='/page1' component={Home} ></Route>
-                    <Route exact path='/page2' component={Page2} ></Route>
-                </Switch>
-            </HashRouter>
-        )
     }
 
-    export default BasicRoute;
 
 
 
