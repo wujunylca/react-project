@@ -4,8 +4,8 @@
   "description": "'learn webpack'",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server --open",
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --open  --config webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,10 +19,13 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@hot-loader/react-dom": "^16.10.2",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "react-router-dom": "^5.1.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.2"
+    "webpack-dev-server": "^3.8.2",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "@babel/cli": "^7.6.4",
@@ -32,6 +35,7 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-hot-loader": "^4.12.15",
