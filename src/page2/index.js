@@ -1,12 +1,12 @@
 import React,{FC} from 'react';
 
-import './index.css';
+import styles from './index.css';
 
 const Page2 = () => {
     return (
         <>
             <span >页面22222</span>
-            <span className='name'>页面22222</span>
+            <span className={styles.name}>页面22222</span>
         </>
     )
 }

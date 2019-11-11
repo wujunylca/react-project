@@ -20,7 +20,18 @@ module.exports =merge(common ,{
         rules:[
             {
                 test:/\.css$/,
-                use:[ 'style-loader','css-loader',"postcss-loader"]
+                use:[ 
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            import: true,
+                            modules: true,
+                            localsConvention: 'camelCase'
+                        },
+                    },
+                    "postcss-loader"
+                ]
             }
         ]
     },
