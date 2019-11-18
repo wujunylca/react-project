@@ -1,6 +1,7 @@
 const path = require('path');
 const merge =require('webpack-merge');
 const common = require('./webpack.common');
+const apiMocker = require('webpack-api-mocker');
 
 // const webpack = require('webpack');
 
@@ -12,9 +13,14 @@ module.exports =merge(common ,{
         contentBase:path.join(__dirname,'dist'),
         host:'localhost',
         port:3000,
-        proxy:{
-            "/api":"http://localhost:3000"
-        }
+        before(app) {
+            apiMocker(app,path.resolve('./mock/index.js'),{
+                proxy:{
+                    '/api':'http://localhost:3000'
+                },
+                changeHost: true,
+            }) 
+        },
     },
     module:{
         rules:[

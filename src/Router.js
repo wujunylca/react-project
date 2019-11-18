@@ -25,6 +25,10 @@ const Page2 = Loadable({
     loader:() => import('./page2/index'),
     loading:LoadingStatus
 });
+const Map = Loadable({
+    loader:() => import('./mapPage/index'),
+    loading:LoadingStatus
+});
 
 const BasicRoute =() => {
     return (
@@ -33,6 +37,7 @@ const BasicRoute =() => {
                 <Route exact path='/' component={Home} ></Route>
                 <Route exact path='/page1' component={Home} ></Route>
                 <Route exact path='/page2' component={Page2} ></Route>
+                <Route exact path='/map' component={Map} ></Route>
             </Switch>
         </HashRouter>
     )
