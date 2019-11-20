@@ -8,8 +8,10 @@
  */
 import React,{FC} from 'react';
 import axios from 'axios';
-
-import styles from './index.css';
+import {DatePicker} from 'antd';
+// import DatePicker from 'antd/es/date-picker'; // 加载 JS
+// import 'antd/es/date-picker/style/css'; // 加载 CSS
+// import styles from './index.less';
 
 const Page2 = () => {
 
@@ -22,10 +24,15 @@ const Page2 = () => {
     return (
         <>
             <span >页面22222</span>
-            <span className={styles.name}>页面22222</span>
-            <button onClick={handleClick}>点击获取请求</button>
+            {/* <span className={styles.name}>页面22222</span> */}
+            <DatePicker />
+            {/* <DatePicker/>
+            <Button type='primary' onClick={handleClick}>点击获取请求</Button> */}
         </>
     )
 }
 
+
 export default Page2;
+
+

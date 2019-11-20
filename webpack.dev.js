@@ -25,19 +25,25 @@ module.exports =merge(common ,{
     module:{
         rules:[
             {
-                test:/\.css$/,
+                test:/\.(css|less)$/,
                 use:[ 
                     'style-loader',
                     {
                         loader: 'css-loader',
+                        // options: {
+                        //     import: true,
+                        //     modules: true,
+                        //     localsConvention: 'camelCase'
+                        // },
+                    },
+                    {
+                        loader: 'less-loader',
                         options: {
-                            import: true,
-                            modules: true,
-                            localsConvention: 'camelCase'
-                        },
+                            javascriptEnabled: true
+                        }
                     },
                     "postcss-loader"
-                ]
+                ],
             }
         ]
     },
