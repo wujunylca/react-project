@@ -63,8 +63,19 @@
                     ]
       手动引入样式，看到效果了。
      
-#步骤3:
+#步骤3:按需加载antd 样式
+
+安装  babel-plugin-import 
+ 在babelrc 里面配置
+ 
+             ["import", {
+                "libraryName": "antd",
+                "libraryDirectory": "lib",
+                "style": "css"
+              }],
    
+******采坑 **** styles：true 配置会出错，虽然不知道为什么 ，可能和配置的libraryDirectory 有关系，有待研究
+
 
 
   
